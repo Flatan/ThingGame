@@ -6,9 +6,10 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>GLEW_STATIC;_UNICODE;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
