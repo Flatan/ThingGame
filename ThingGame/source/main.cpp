@@ -4,6 +4,8 @@
 #include <string>
 #include <loadShader.cpp>
 #include <windows.h>
+#include <chrono>
+#include <thread>
 
 
 int main(void)
@@ -41,9 +43,13 @@ int main(void)
         #include "SimpleFragmentShader.fragmentshader"
         ;
     GLuint programID = LoadShaders(vertexCode, fragmentCode);
+
+    const double MAX_FRAMERATE = 30;
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
+        std::chrono::system_clock::time_point endPt =
+            std::chrono::system_clock::now() + std::chrono::milliseconds((int)(1000 / MAX_FRAMERATE));
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -83,6 +89,8 @@ int main(void)
 
         /* Poll for and process events */
         glfwPollEvents();
+
+        std::this_thread::sleep_until(endPt);
     }
 
     glfwTerminate();
