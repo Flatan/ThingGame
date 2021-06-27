@@ -1,11 +1,14 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <string>
 #include <loadShader.cpp>
 #include <windows.h>
 
+
 int main(void)
 {
+    std::string s;
     GLFWwindow* window;
 
     /* Initialize the library */
@@ -31,8 +34,13 @@ int main(void)
     }
     fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
-
-    GLuint programID = LoadShaders("..\\..\\SimpleVertexShader.vertexshader", "..\\..\\SimpleFragmentShader.fragmentshader");
+    const std::string vertexCode = 
+        #include "SimpleVertexShader.vertexshader"
+        ;
+    const std::string fragmentCode =
+        #include "SimpleFragmentShader.fragmentshader"
+        ;
+    GLuint programID = LoadShaders(vertexCode, fragmentCode);
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -79,4 +87,4 @@ int main(void)
 
     glfwTerminate();
     return 0;
-}
+};
